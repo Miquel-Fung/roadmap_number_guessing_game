@@ -24,19 +24,17 @@ def number_guessing():
                 print("You didn't input 1, 2, or 3, try again.")
         except ValueError:
             print("You didn't input 1, 2, or 3, try again.")
-
     
     chances = 10 // (difficulty + 1)
     difficulty_name = "Easy" if difficulty == 0 else "Medium" if difficulty == 1 else "Hard"
-
-    print(f"\nGreat! You have selected the {difficulty_name} difficulty level.", "Let's start the game!" sep="\n")
-    
     start_guessing_time = time.time()
     attempts = 1
     
     #tuple of all possible hints
     hints_tuple = ("It is in pi. Think about that.", f"It has {len(str(number))} digits.", f"It is {"even" if number % 2 == 0 else "odd"}.", f"It starts with {str(number)[0]}.", f"It is one of these numbers: {sorted(random.choices(range(1, 101), k=9) + [number])}.")
-
+    
+    print(f"\nGreat! You have selected the {difficulty_name} difficulty level.", "Let's start the game!" sep="\n")
+    
     while attempts <= chances:
         guess = input("\nEnter your guess: ")
 
@@ -83,7 +81,7 @@ def number_guessing():
         if replay == "y":
             print("Replaying...")
             number_guessing()
-            return
+            return #if function is broken out of, means they quit it so this just breaks out of the function out of the function... till completely out
         elif replay == "n":
             print("Quitting...")
             return
@@ -91,7 +89,7 @@ def number_guessing():
             print("Input not Y or N, try again.")
 
 
-#initialize scores
+#initialize scores to make lists with valid indexes
 high_score = [[99] * 3 for _ in range(3)]
 score = [99] * 3
 

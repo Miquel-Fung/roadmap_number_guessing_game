@@ -25,7 +25,7 @@ def number_guessing():
         except ValueError:
             print("You didn't input 1, 2, or 3, try again.")
     
-    chances = 10 // (difficulty + 1)
+    chances = 10 // (difficulty + 1) #this coincidentally works
     difficulty_name = "Easy" if difficulty == 0 else "Medium" if difficulty == 1 else "Hard"
     start_guessing_time = time.time()
     attempts = 1
@@ -33,7 +33,8 @@ def number_guessing():
     #tuple of all possible hints
     hints_tuple = ("It is in pi. Think about that.", f"It has {len(str(number))} digits.", f"It is {"even" if number % 2 == 0 else "odd"}.", f"It starts with {str(number)[0]}.", f"It is one of these numbers: {sorted(random.choices(range(1, 101), k=9) + [number])}.")
     
-    print(f"\nGreat! You have selected the {difficulty_name} difficulty level.", "Let's start the game!" sep="\n")
+    print(f"\nGreat! You have selected the {difficulty_name} difficulty level.")
+    print("Let's start the game!")
     
     while attempts <= chances:
         guess = input("\nEnter your guess: ")
@@ -66,7 +67,6 @@ def number_guessing():
             high_score[difficulty] = score if attempts < score_attempts or (attempts == score_attempts and score[2] < high_score[difficulty][2]) else high_score[difficulty]
             print(f"Your score is {score[1]} attempt{"s" if score[1] > 1 else ""} in {score[2]:.3f} seconds for {score[0]} difficulty.")
             break
-
         attempts += 1
 
     #losing screen
@@ -88,12 +88,11 @@ def number_guessing():
         else:
             print("Input not Y or N, try again.")
 
-
 #initialize scores to make lists with valid indexes
 high_score = [[99] * 3 for _ in range(3)]
 score = [99] * 3
 
-print("Welcome to the Number Guessing Game!")
+print("Welcome to the Number Guessing Game!") #who would say welcome multiple times
 number_guessing()
 
 print("You have quit. :(")

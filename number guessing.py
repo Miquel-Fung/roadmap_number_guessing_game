@@ -6,6 +6,7 @@ def number_guessing():
     print(
     "I'm think of a number between 1 and 100",
     "You have 5 chances to guess the correct number.",
+    "If you're stuck, you can type ? for a hint.",
     "",
     "Please select the difficulty level:",
     "1. Easy (10 chances)",
@@ -43,15 +44,15 @@ def number_guessing():
         try:
             guess = int(guess)
         except: #all are continue to skip the attempts += 1
-            if str(guess) == "hint" and attempts > 1:
+            if str(guess) == "?" and attempts > 1:
                 print(hints_tuple[random.randint(0,attempts // 2) + difficulty])
                 hints += 1
                 continue
-            elif str(guess) == "hint":
+            elif str(guess) == "?":
                 print("You haven't guessed yet! How are you even stuck.")
                 continue
             else:
-                print("You didn't input a number or hint.")
+                print("You didn't input a number or '?'.")
                 continue
         
         #number guesses

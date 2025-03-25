@@ -29,7 +29,7 @@ def number_guessing():
     difficulty_name = "Easy" if difficulty == 0 else "Medium" if difficulty == 1 else "Hard"
     start_guessing_time = time.time()
     attempts = 1
-    
+    hints = 0
     #tuple of all possible hints
     hints_tuple = ("It is in pi. Think about that.", f"It has {len(str(number))} digits.", f"It is {"even" if number % 2 == 0 else "odd"}.", f"It starts with {str(number)[0]}.", f"It is one of these numbers: {sorted(random.choices(range(1, 101), k=9) + [number])}.")
     
@@ -45,6 +45,7 @@ def number_guessing():
         except:
             if str(guess) == "hint" and attempts > 1:
                 print(hints_tuple[random.randint(0,attempts // 2) + difficulty])
+                hints += 1
                 continue
             elif str(guess) == "hint":
                 print("You haven't guessed yet! How are you even stuck.")
@@ -62,19 +63,18 @@ def number_guessing():
             print(f"Congratulations! You guessed the correct number in {attempts} attempt{"s" if attempts > 1 else ""}.")
             end_guessing_time = time.time()
             guessing_time = end_guessing_time - start_guessing_time
-            score = [difficulty_name, attempts, guessing_time]
-            score_attempts = high_score[difficulty][1]
-            high_score[difficulty] = score if attempts < score_attempts or (attempts == score_attempts and score[2] < high_score[difficulty][2]) else high_score[difficulty]
-            print(f"Your score is {score[1]} attempt{"s" if score[1] > 1 else ""} in {score[2]:.3f} seconds for {score[0]} difficulty.")
+            score = [difficulty_name, attempts, hints, guessing_time]
+            high_score[difficulty] = score if high_score[difficulty][1:-1] > score[1:-1] else high_score[difficulty]
+            print(f"Your score is {score[1]} attempt{"s" if score[1] > 1 else ""} in {score[3]:.3f} seconds with {hints} hint{"" if hints == 1 else "s"} for {score[0]} difficulty.")
             break
         attempts += 1
 
     #losing screen
     else:
         print(f"The number was {number}.")
-    
-    print(f"Your high score is {high_score[difficulty][1]} attempt{"s" if high_score[difficulty][1] > 1 else ""} in {high_score[difficulty][2]:.3f} seconds for {high_score[difficulty][0]} difficulty.")
 
+    print(f"Your high score is {high_score[difficulty][1]} attempt{"s" if high_score[difficulty][1] > 1 else ""} with {high_score[difficulty][2]} hint{"" if hints == 1 else "s"} in {high_score[difficulty][-1]:.3f} seconds for {high_score[difficulty][0]} difficulty.")
+    #the lengths I go through, to have the gramatically accurate s' ^
     #play again?
     while True:
         replay = input("\nPlay again? (Y/N):").lower()
@@ -89,9 +89,9 @@ def number_guessing():
             print("Input not Y or N, try again.")
 
 #initialize scores to make lists with valid indexes
-high_score = [[99] * 3 for _ in range(3)]
-score = [99] * 3
-
+high_score = [[99] * 4 for _ in range(3)]
+score = [99] * 4
+print(high_score)
 print("Welcome to the Number Guessing Game!") #who would say welcome multiple times
 number_guessing()
 

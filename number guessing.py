@@ -65,7 +65,7 @@ def number_guessing():
             guessing_time = end_guessing_time - start_guessing_time
             score = [difficulty_name, attempts, hints, guessing_time]
             high_score[difficulty] = score if high_score[difficulty][1:-1] > score[1:-1] else high_score[difficulty]
-            print(f"Your score is {score[1]} attempt{"s" if score[1] > 1 else ""} in {score[3]:.3f} seconds with {hints} hint{"" if hints == 1 else "s"} for {score[0]} difficulty.")
+            print(f"Your score is {score[1]} attempt{"s" if score[1] > 1 else ""} with {hints} hint{"" if hints == 1 else "s"} in {score[3]:.3f} seconds for {score[0]} difficulty.")
             break
         attempts += 1
 
@@ -73,7 +73,7 @@ def number_guessing():
     else:
         print(f"The number was {number}.")
 
-    print(f"Your high score is {high_score[difficulty][1]} attempt{"s" if high_score[difficulty][1] > 1 else ""} with {high_score[difficulty][2]} hint{"" if hints == 1 else "s"} in {high_score[difficulty][-1]:.3f} seconds for {high_score[difficulty][0]} difficulty.")
+    print(f"Your high score is {high_score[difficulty][1]} attempt{"s" if high_score[difficulty][1] > 1 else ""} with {high_score[difficulty][2]} hint{"" if high_score[difficulty][2] == 1 else "s"} in {high_score[difficulty][-1]:.3f} seconds for {high_score[difficulty][0]} difficulty.")
     #the lengths I go through, to have the gramatically accurate s' ^
     #play again?
     while True:

@@ -42,7 +42,7 @@ def number_guessing():
         #hints
         try:
             guess = int(guess)
-        except:
+        except: #all are continue to skip the attempts += 1
             if str(guess) == "hint" and attempts > 1:
                 print(hints_tuple[random.randint(0,attempts // 2) + difficulty])
                 hints += 1
